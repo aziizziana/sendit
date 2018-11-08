@@ -13,31 +13,25 @@ class ParcelOrders(Resource):
     def post(self):
         #Alternative https://marshmallow.readthedocs.io/en/3.0/
         parser = reqparse.RequestParser()
-        parser.add_argument('name')
-        parser.add_argument('price')
+        parser.add_argument('destination')
         args = parser.parse_args()
-        orders.append(args)
-        return orders
+        parcel_orders.append(args)
+        return parcel_orders
      
 class Order(Resource): 
     def get(self, index):
-        return orders[int(index)]
+        return parcel_orders[int(index)]
 
     def put(self, index):
         parser = reqparse.RequestParser()
-        parser.add_argument('name')
-        parser.add_argument('price')
+        parser.add_argument('destination')
         args = parser.parse_args()
-        orders[int(index)].update(args)
-        return orders
+        parcel_orders[int(index)].update(args)
+        return parcel_orders
 
-class User(Resource):
-    def get(self):
-        return {'username': 'ziana'}
 
-api.add_resource(Orders,'/v1/orders')
-api.add_resource(Order,'/v1/orders/<index>')
-api.add_resource(User,'/v1/users')
+api.add_resource(Orders,'/v1/parcel_orders')
+api.add_resource(Order,'/v1/parcel_orders/<index>')
 
 if __name__ == '__main__':
     app.run(debug=True)
